@@ -1,0 +1,21 @@
+# Rider-specific files
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Build directories
+bin/
+obj/
+
+# NuGet Packages
+packages/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.user
+*.suo
+
+# System-specific files
+.DS_Store
+Thumbs.db
