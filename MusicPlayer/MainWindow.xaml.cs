@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MusicPlayer.Utils;
 
 namespace MusicPlayer;
 
@@ -20,4 +21,5 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
 }
