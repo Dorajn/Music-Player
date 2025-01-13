@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using MusicPlayer.Utils;
 
+
 namespace MusicPlayer;
 
 /// <summary>
@@ -18,14 +19,16 @@ namespace MusicPlayer;
 /// </summary>
 public partial class MainWindow : Window
 {
-
+    private static List<MusicFile> temp = new List<MusicFile>();
     public ObservableCollection<LeafNode> LeafNodes { get; set; }
-    public ObservableCollection<MusicFile> MusicFilesList { get; set; }
+    public static ObservableCollection<MusicFile> MusicFilesList { get; set; }
+    
     public MainWindow()
     {
         InitializeComponent();
         GatherPaths();
-
+        
+        MusicFilesList = new ObservableCollection<MusicFile>();
         
         DataContext = this;
     }
@@ -33,6 +36,7 @@ public partial class MainWindow : Window
     private void GatherPaths()
     {
         Data data = new Data(Metadata.absolutePath);
+        LeafNodes = new ObservableCollection<LeafNode>();
         foreach (var playlist in data.FetchedData)
         {
             LeafNodes.Add(new LeafNode(playlist.Item1, playlist.Item2));
@@ -80,13 +84,24 @@ public partial class MainWindow : Window
 
         private void ExecuteCommand(object param)
         {
+            Console.WriteLine("dupa");
             List<MusicFile> musicFiles = new List<MusicFile>();
             foreach (var data in Data)
             {
-                
+                MusicFile mf = new MusicFile();
+                mf.FilePath = Metadata.absolutePath + "\\" + Header + "\\" + data;
+                Console.WriteLine(mf.FilePath);
+                mf.Title = data;
+                musicFiles.Add(mf);
             }
 
-            MusicFilesList = ObservableCollection<MusicFile>(musicFiles);
+            // foreach (var mf in musicFiles)
+            // {
+            //     Console.WriteLine(mf.Title);
+            // }
+
+            MusicFilesList = new ObservableCollection<MusicFile>(musicFiles);
+
         }
     }
 
