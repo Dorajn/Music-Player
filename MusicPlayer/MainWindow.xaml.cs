@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using MusicPlayer.Utils;
 
 namespace MusicPlayer;
 
@@ -19,36 +20,25 @@ public partial class MainWindow : Window
 {
 
     public ObservableCollection<LeafNode> LeafNodes { get; set; }
+    public ObservableCollection<MusicFile> MusicFilesList { get; set; }
     public MainWindow()
     {
         InitializeComponent();
+        GatherPaths();
 
-        var musicFiles = new List<MusicFile>
-        {
-            new MusicFile { Title = "Song A", Artist = "Artist 1", Duration = "3:45" },
-            new MusicFile { Title = "Song B", Artist = "Artist 2", Duration = "4:20" },
-            new MusicFile { Title = "Song C", Artist = "Artist 3", Duration = "2:30" }
-        };
-
-        MusicFilesList.ItemsSource = musicFiles;
-
-        LeafNodes = new ObservableCollection<LeafNode>
-        {
-            new LeafNode { Header = "Song 1", Data = "song1.mp3" },
-            new LeafNode { Header = "Song 2", Data = "song2.mp3" },
-            new LeafNode { Header = "Song 3", Data = "song3.mp3" }
-        };
         
         DataContext = this;
     }
 
-    private void AddNewNode()
+    private void GatherPaths()
     {
-        // Add a new parent node
-        var newPlaylist = new LeafNode { Header = "New Playlist" };
-        LeafNodes.Add(newPlaylist);
-        
+        Data data = new Data(Metadata.absolutePath);
+        foreach (var playlist in data.FetchedData)
+        {
+            LeafNodes.Add(new LeafNode(playlist.Item1, playlist.Item2));
+        }
     }
+    
 
     public class MusicFile
     {
@@ -69,7 +59,9 @@ public partial class MainWindow : Window
 
         private void PlayMusic(string filePath)
         {
-            // Playback logic here
+            filePath = "C:\\Users\\derqu\\OneDrive\\Pulpit\\example.mp3";
+            AudioPlayerMedia player = new AudioPlayerMedia();
+            player.Play(filePath);
         }
     }
 
@@ -77,19 +69,24 @@ public partial class MainWindow : Window
     {
         public string Header { get; set; } // Displayed text
         public ICommand ButtonCommand { get; set; } // Command for the button
-        public string Data { get; set; } // Additional data, like file paths
+        public List<string> Data { get; set; } // Additional data, like file paths
 
-        public LeafNode()
+        public LeafNode(string header, List<string> songs)
         {
-            Header = string.Empty;
-            Data = string.Empty;
+            Header = header;
+            Data = new List<string>(songs);
             ButtonCommand = new RelayCommand(param => ExecuteCommand(param));
         }
 
         private void ExecuteCommand(object param)
         {
-            MessageBox.Show($"Executing command for {param}");
-            // Implement custom logic, e.g., playing a file
+            List<MusicFile> musicFiles = new List<MusicFile>();
+            foreach (var data in Data)
+            {
+                
+            }
+
+            MusicFilesList = ObservableCollection<MusicFile>(musicFiles);
         }
     }
 
