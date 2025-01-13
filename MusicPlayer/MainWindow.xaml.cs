@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using MusicPlayer.Utils;
+using System.ComponentModel;
 
 
 namespace MusicPlayer;
@@ -19,15 +20,15 @@ namespace MusicPlayer;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private static List<MusicFile> temp = new List<MusicFile>();
     public ObservableCollection<LeafNode> LeafNodes { get; set; }
     public static ObservableCollection<MusicFile> MusicFilesList { get; set; }
+
     
     public MainWindow()
     {
         InitializeComponent();
         GatherPaths();
-        
+
         MusicFilesList = new ObservableCollection<MusicFile>();
         
         DataContext = this;
@@ -84,27 +85,18 @@ public partial class MainWindow : Window
 
         private void ExecuteCommand(object param)
         {
-            Console.WriteLine("dupa");
-            List<MusicFile> musicFiles = new List<MusicFile>();
+            MusicFilesList.Clear();
             foreach (var data in Data)
             {
                 MusicFile mf = new MusicFile();
                 mf.FilePath = Metadata.absolutePath + "\\" + Header + "\\" + data;
-                Console.WriteLine(mf.FilePath);
                 mf.Title = data;
-                musicFiles.Add(mf);
+                MusicFilesList.Add(mf);
             }
-
-            // foreach (var mf in musicFiles)
-            // {
-            //     Console.WriteLine(mf.Title);
-            // }
-
-            MusicFilesList = new ObservableCollection<MusicFile>(musicFiles);
-
         }
     }
 
+    
 
     public class RelayCommand : ICommand
     {
