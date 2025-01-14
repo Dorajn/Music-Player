@@ -1,18 +1,21 @@
 ﻿using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System.Windows.Media;
+using TagLib;
 
 namespace MusicPlayer.Utils;
 
 public class AudioPlayerNAudio : IDisposable, IAudioPlayer
 {
     private IWavePlayer _player;
-    private WaveStream _audioFileReader;
+    private WaveStream? _audioFileReader;
     private VolumeSampleProvider _volumeProvider;
+    public float VolumeLevel { get; set; }
 
     public AudioPlayerNAudio()
     {
         _player = new WaveOutEvent();
+        VolumeLevel = 0.5f;
     }
 
     public void Play(string filePath)
@@ -21,8 +24,8 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
         {
             _audioFileReader = CreateAudioFileReader(filePath);
             _volumeProvider = new VolumeSampleProvider(_audioFileReader.ToSampleProvider());
+            Volume(VolumeLevel);
             _player.Init(_volumeProvider);
-            _player.Init(_audioFileReader);
             _player.Play();
         }
         catch (Exception ex)
@@ -89,7 +92,36 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
     {
         if (volume >= 0 && volume <= 1)
         {
-            _volumeProvider.Volume = volume;
+            if(_volumeProvider != null)
+                _volumeProvider.Volume = volume;
+            VolumeLevel = volume;
         }
+    }
+
+    public string GetTotalSongTime(string filePath)
+    {
+        using (var audioFile = new AudioFileReader(filePath))
+        {
+            TimeSpan duration = audioFile.TotalTime;
+            return duration.ToString(@"mm\:ss");
+        }
+    }
+    
+    public double GetSongPlaybackPercentage()
+    {
+        if (_audioFileReader == null || _audioFileReader.TotalTime == TimeSpan.Zero)
+        {
+            return 0;
+        }
+
+        double percentage = _audioFileReader.CurrentTime.TotalSeconds / _audioFileReader.TotalTime.TotalSeconds;
+        return percentage;
+    }
+
+    public string GetSongArtist(string filePath)
+    {
+        var file = File.Create(filePath);
+        string artist = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Unknown artist";
+        return artist;
     }
 }

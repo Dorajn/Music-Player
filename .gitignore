@@ -1,5 +1,6 @@
 # Rider-specific files
 .idea/
+.vs/
 *.sublime-workspace
 *.sublime-project
 
