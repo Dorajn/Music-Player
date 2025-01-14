@@ -4,7 +4,6 @@ namespace MusicPlayer.Utils;
 public class Metadata
 {
     public static string absolutePath;
-    
     private static string key = @"SOFTWARE\ChadPlayer";
     private static string valueName = "musicFolderPath";
 
@@ -13,7 +12,6 @@ public class Metadata
         absolutePath = path;
         RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(key);
         registryKey.SetValue(valueName, path);
-        registryKey.Close();
     }
     
     public static string GetMusicFolderPath()
@@ -21,7 +19,6 @@ public class Metadata
         RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(key);
         if (registryKey != null)
         {
-            registryKey.Close();
             return registryKey.GetValue(valueName).ToString();
         }
         return string.Empty;  
