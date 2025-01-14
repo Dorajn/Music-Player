@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using MusicPlayer.Utils;
 using System.ComponentModel;
+using System.Windows.Threading;
 using System.Drawing.Design;
 
 
@@ -23,20 +24,38 @@ public partial class MainWindow : Window
 {
     public ObservableCollection<LeafNode> LeafNodes { get; set; }
     public static ObservableCollection<MusicFile> MusicFilesList { get; set; }
+    private static AudioPlayerNAudio player { get; set; }
+    private static DispatcherTimer timer { get; set; }
     public static ObservableProperty<string> CurrentSongTitle { get; set; }
     public static ObservableProperty<string> CurrentSongArtist { get; set; }
-    public static AudioPlayerMedia Player { get; set; }
+
     public MainWindow()
     {
         InitializeComponent();
         GatherPaths();
-
+        
         MusicFilesList = new ObservableCollection<MusicFile>();
+        player = new AudioPlayerNAudio();
+        timer = new DispatcherTimer();
+        SetDispacher();
+        
         CurrentSongTitle = new ObservableProperty<string>();
         CurrentSongArtist = new ObservableProperty<string>();
-        Player = new AudioPlayerMedia();
 
         DataContext = this;
+    }
+
+    private void SetDispacher()
+    {
+        timer.Interval = TimeSpan.FromSeconds(1);
+        timer.Tick += ShowTrackPercentage;
+        timer.Start();
+    }
+
+    //FOR DEBUG
+    private void ShowTrackPercentage(object sender, EventArgs e)
+    {
+        Console.WriteLine(player.GetSongPlaybackPercentage());
     }
 
     private void GatherPaths()
@@ -75,7 +94,7 @@ public partial class MainWindow : Window
 
         private void PlayMusic(string filePath)
         {
-            Player.Play(filePath);
+            player.Play(filePath);
             CurrentSongTitle.Value = Title;
             CurrentSongArtist.Value = Artist;
         }

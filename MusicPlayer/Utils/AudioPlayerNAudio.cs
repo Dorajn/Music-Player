@@ -1,13 +1,14 @@
 ﻿using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System.Windows.Media;
+using TagLib;
 
 namespace MusicPlayer.Utils;
 
 public class AudioPlayerNAudio : IDisposable, IAudioPlayer
 {
     private IWavePlayer _player;
-    private WaveStream _audioFileReader;
+    private WaveStream? _audioFileReader;
     private VolumeSampleProvider _volumeProvider;
 
     public AudioPlayerNAudio()
@@ -91,5 +92,32 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
         {
             _volumeProvider.Volume = volume;
         }
+    }
+
+    public string GetTotalSongTime(string filePath)
+    {
+        using (var audioFile = new AudioFileReader(filePath))
+        {
+            TimeSpan duration = audioFile.TotalTime;
+            return duration.ToString(@"mm\:ss");
+        }
+    }
+    
+    public double GetSongPlaybackPercentage()
+    {
+        if (_audioFileReader == null || _audioFileReader.TotalTime == TimeSpan.Zero)
+        {
+            return 0;
+        }
+
+        double percentage = _audioFileReader.CurrentTime.TotalSeconds / _audioFileReader.TotalTime.TotalSeconds;
+        return percentage;
+    }
+
+    public string GetSongArtist(string filePath)
+    {
+        var file = File.Create(filePath);
+        string artist = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Unknown artist";
+        return artist;
     }
 }
