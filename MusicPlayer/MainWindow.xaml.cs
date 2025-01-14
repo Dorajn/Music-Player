@@ -24,7 +24,7 @@ public partial class MainWindow : Window
 {
     public ObservableCollection<LeafNode> LeafNodes { get; set; }
     public static ObservableCollection<MusicFile> MusicFilesList { get; set; }
-    private static AudioPlayerNAudio player { get; set; }
+    private static AudioPlayerNAudio Player { get; set; }
     private static DispatcherTimer timer { get; set; }
     public static ObservableProperty<string> CurrentSongTitle { get; set; }
     public static ObservableProperty<string> CurrentSongArtist { get; set; }
@@ -35,7 +35,7 @@ public partial class MainWindow : Window
         GatherPaths();
         
         MusicFilesList = new ObservableCollection<MusicFile>();
-        player = new AudioPlayerNAudio();
+        Player = new AudioPlayerNAudio();
         timer = new DispatcherTimer();
         SetDispacher();
         
@@ -55,7 +55,7 @@ public partial class MainWindow : Window
     //FOR DEBUG
     private void ShowTrackPercentage(object sender, EventArgs e)
     {
-        Console.WriteLine(player.GetSongPlaybackPercentage());
+        Console.WriteLine(Player.GetSongPlaybackPercentage());
     }
 
     private void GatherPaths()
@@ -94,7 +94,7 @@ public partial class MainWindow : Window
 
         private void PlayMusic(string filePath)
         {
-            player.Play(filePath);
+            Player.Play(filePath);
             CurrentSongTitle.Value = Title;
             CurrentSongArtist.Value = Artist;
         }
