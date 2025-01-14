@@ -1,6 +1,7 @@
 ﻿using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System.Windows.Media;
+using TagLib;
 
 namespace MusicPlayer.Utils;
 
@@ -111,5 +112,12 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
 
         double percentage = _audioFileReader.CurrentTime.TotalSeconds / _audioFileReader.TotalTime.TotalSeconds;
         return percentage;
+    }
+
+    public string GetSongArtist(string filePath)
+    {
+        var file = File.Create(filePath);
+        string artist = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Unknown artist";
+        return artist;
     }
 }
