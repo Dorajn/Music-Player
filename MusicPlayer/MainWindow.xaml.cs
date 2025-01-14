@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using MusicPlayer.Utils;
 using System.ComponentModel;
 using System.Windows.Threading;
+using System.Drawing.Design;
 
 
 namespace MusicPlayer;
@@ -25,7 +26,9 @@ public partial class MainWindow : Window
     public static ObservableCollection<MusicFile> MusicFilesList { get; set; }
     private static AudioPlayerNAudio player { get; set; }
     private static DispatcherTimer timer { get; set; }
-    
+    public static ObservableProperty<string> CurrentSongTitle { get; set; }
+    public static ObservableProperty<string> CurrentSongArtist { get; set; }
+
     public MainWindow()
     {
         InitializeComponent();
@@ -34,9 +37,11 @@ public partial class MainWindow : Window
         MusicFilesList = new ObservableCollection<MusicFile>();
         player = new AudioPlayerNAudio();
         timer = new DispatcherTimer();
-        
         SetDispacher();
         
+        CurrentSongTitle = new ObservableProperty<string>();
+        CurrentSongArtist = new ObservableProperty<string>();
+
         DataContext = this;
     }
 
@@ -62,7 +67,13 @@ public partial class MainWindow : Window
             LeafNodes.Add(new LeafNode(playlist.Item1, playlist.Item2));
         }
     }
-    
+
+    private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+	{
+        float newVolume = ((float)slVolume.Value) / 100;
+        Console.WriteLine(newVolume);
+		Player.Volume(newVolume);
+	}
 
     public class MusicFile
     {
@@ -84,6 +95,8 @@ public partial class MainWindow : Window
         private void PlayMusic(string filePath)
         {
             player.Play(filePath);
+            CurrentSongTitle.Value = Title;
+            CurrentSongArtist.Value = Artist;
         }
     }
 
@@ -113,8 +126,6 @@ public partial class MainWindow : Window
         }
     }
 
-    
-
     public class RelayCommand : ICommand
     {
         private readonly Action<object> _execute;
@@ -140,6 +151,28 @@ public partial class MainWindow : Window
         {
             add => CommandManager.RequerySuggested += value!;
             remove => CommandManager.RequerySuggested -= value!;
+        }
+    }
+
+    public class ObservableProperty<T> : INotifyPropertyChanged
+    {
+        private T _value { get; set; }
+
+        public T Value
+        {
+            get => _value;
+            set
+            {
+                _value = value;
+                OnPropertyChanged(nameof(Value));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
