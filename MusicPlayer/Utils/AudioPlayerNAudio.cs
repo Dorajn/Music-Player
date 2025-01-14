@@ -7,7 +7,7 @@ namespace MusicPlayer.Utils;
 public class AudioPlayerNAudio : IDisposable, IAudioPlayer
 {
     private IWavePlayer _player;
-    private WaveStream _audioFileReader;
+    private WaveStream? _audioFileReader;
     private VolumeSampleProvider _volumeProvider;
 
     public AudioPlayerNAudio()
@@ -93,12 +93,23 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
         }
     }
 
-    public void GetTotalSongTime(string filePath)
+    public string GetTotalSongTime(string filePath)
     {
         using (var audioFile = new AudioFileReader(filePath))
         {
             TimeSpan duration = audioFile.TotalTime;
-            Console.WriteLine($"Czas trwania utworu: {duration.ToString(@"mm\:ss")}");
+            return duration.ToString(@"mm\:ss");
         }
+    }
+    
+    public double GetSongPlaybackPercentage()
+    {
+        if (_audioFileReader == null || _audioFileReader.TotalTime == TimeSpan.Zero)
+        {
+            return 0;
+        }
+
+        double percentage = _audioFileReader.CurrentTime.TotalSeconds / _audioFileReader.TotalTime.TotalSeconds;
+        return percentage;
     }
 }
