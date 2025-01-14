@@ -31,6 +31,10 @@ public partial class App : Application
         Data data = new Data(path);
         data.Print();
         Metadata.absolutePath = path;
+
+        // AudioPlayerNAudio player = new AudioPlayerNAudio();
+        // // player.Play(path + "\\playlist1\\example.mp3");
+        // player.GetTotalSongTime(path + "\\playlist1\\example.mp3");
     }
 
 }

@@ -92,4 +92,13 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
             _volumeProvider.Volume = volume;
         }
     }
+
+    public void GetTotalSongTime(string filePath)
+    {
+        using (var audioFile = new AudioFileReader(filePath))
+        {
+            TimeSpan duration = audioFile.TotalTime;
+            Console.WriteLine($"Czas trwania utworu: {duration.ToString(@"mm\:ss")}");
+        }
+    }
 }

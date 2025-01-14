@@ -64,8 +64,8 @@ public partial class MainWindow : Window
 
         private void PlayMusic(string filePath)
         {
-            filePath = "C:\\Users\\derqu\\OneDrive\\Pulpit\\example.mp3";
-            AudioPlayerMedia player = new AudioPlayerMedia();
+            // AudioPlayerMedia player = new AudioPlayerMedia();
+            AudioPlayerNAudio player = new AudioPlayerNAudio();
             player.Play(filePath);
         }
     }
