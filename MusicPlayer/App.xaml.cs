@@ -11,11 +11,12 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        const string path = "C:\\Users\\derqu\\OneDrive\\Pulpit\\folder";
-        Data data = new Data(path);
-        data.Print();
-        Metadata.absolutePath = path;
         
+        //To powinno byc wywylywane tylko RAZ przy instalacji lub RAZ przez was gdy uruchamiacie aplikacje
+        //Ta metoda zapisuje sciezke do rejestru systemu
+        Metadata.SaveMusicFolderPath("C:\\Users\\derqu\\OneDrive\\Pulpit\\folder");
+
+        Metadata.absolutePath = Metadata.GetMusicFolderPath();
     }
 
 }
