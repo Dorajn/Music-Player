@@ -9,6 +9,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using MusicPlayer.Utils;
+using System.ComponentModel;
+using System.Drawing.Design;
+
 
 namespace MusicPlayer;
 
@@ -17,38 +21,40 @@ namespace MusicPlayer;
 /// </summary>
 public partial class MainWindow : Window
 {
-
     public ObservableCollection<LeafNode> LeafNodes { get; set; }
+    public static ObservableCollection<MusicFile> MusicFilesList { get; set; }
+    public static ObservableProperty<string> CurrentSongTitle { get; set; }
+    public static ObservableProperty<string> CurrentSongArtist { get; set; }
+    public static AudioPlayerMedia Player { get; set; }
     public MainWindow()
     {
         InitializeComponent();
+        GatherPaths();
 
-        var musicFiles = new List<MusicFile>
-        {
-            new MusicFile { Title = "Song A", Artist = "Artist 1", Duration = "3:45" },
-            new MusicFile { Title = "Song B", Artist = "Artist 2", Duration = "4:20" },
-            new MusicFile { Title = "Song C", Artist = "Artist 3", Duration = "2:30" }
-        };
+        MusicFilesList = new ObservableCollection<MusicFile>();
+        CurrentSongTitle = new ObservableProperty<string>();
+        CurrentSongArtist = new ObservableProperty<string>();
+        Player = new AudioPlayerMedia();
 
-        MusicFilesList.ItemsSource = musicFiles;
-
-        LeafNodes = new ObservableCollection<LeafNode>
-        {
-            new LeafNode { Header = "Song 1", Data = "song1.mp3" },
-            new LeafNode { Header = "Song 2", Data = "song2.mp3" },
-            new LeafNode { Header = "Song 3", Data = "song3.mp3" }
-        };
-        
         DataContext = this;
     }
 
-    private void AddNewNode()
+    private void GatherPaths()
     {
-        // Add a new parent node
-        var newPlaylist = new LeafNode { Header = "New Playlist" };
-        LeafNodes.Add(newPlaylist);
-        
+        Data data = new Data(Metadata.absolutePath);
+        LeafNodes = new ObservableCollection<LeafNode>();
+        foreach (var playlist in data.FetchedData)
+        {
+            LeafNodes.Add(new LeafNode(playlist.Item1, playlist.Item2));
+        }
     }
+
+    private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+	{
+        float newVolume = ((float)slVolume.Value) / 100;
+        Console.WriteLine(newVolume);
+		Player.Volume(newVolume);
+	}
 
     public class MusicFile
     {
@@ -69,7 +75,9 @@ public partial class MainWindow : Window
 
         private void PlayMusic(string filePath)
         {
-            // Playback logic here
+            Player.Play(filePath);
+            CurrentSongTitle.Value = Title;
+            CurrentSongArtist.Value = Artist;
         }
     }
 
@@ -77,22 +85,27 @@ public partial class MainWindow : Window
     {
         public string Header { get; set; } // Displayed text
         public ICommand ButtonCommand { get; set; } // Command for the button
-        public string Data { get; set; } // Additional data, like file paths
+        public List<string> Data { get; set; } // Additional data, like file paths
 
-        public LeafNode()
+        public LeafNode(string header, List<string> songs)
         {
-            Header = string.Empty;
-            Data = string.Empty;
+            Header = header;
+            Data = new List<string>(songs);
             ButtonCommand = new RelayCommand(param => ExecuteCommand(param));
         }
 
         private void ExecuteCommand(object param)
         {
-            MessageBox.Show($"Executing command for {param}");
-            // Implement custom logic, e.g., playing a file
+            MusicFilesList.Clear();
+            foreach (var data in Data)
+            {
+                MusicFile mf = new MusicFile();
+                mf.FilePath = Metadata.absolutePath + "\\" + Header + "\\" + data;
+                mf.Title = data;
+                MusicFilesList.Add(mf);
+            }
         }
     }
-
 
     public class RelayCommand : ICommand
     {
@@ -119,6 +132,28 @@ public partial class MainWindow : Window
         {
             add => CommandManager.RequerySuggested += value!;
             remove => CommandManager.RequerySuggested -= value!;
+        }
+    }
+
+    public class ObservableProperty<T> : INotifyPropertyChanged
+    {
+        private T _value { get; set; }
+
+        public T Value
+        {
+            get => _value;
+            set
+            {
+                _value = value;
+                OnPropertyChanged(nameof(Value));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
