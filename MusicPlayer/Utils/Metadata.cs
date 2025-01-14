@@ -13,6 +13,7 @@ public class Metadata
         absolutePath = path;
         RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(key);
         registryKey.SetValue(valueName, path);
+        registryKey.Close();
     }
     
     public static string GetMusicFolderPath()
@@ -20,8 +21,26 @@ public class Metadata
         RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(key);
         if (registryKey != null)
         {
+            registryKey.Close();
             return registryKey.GetValue(valueName).ToString();
         }
         return string.Empty;  
+    }
+    
+    public void UpdateMusicFolderPath(string newPath)
+    {
+        RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(key, writable: true);
+    
+        if (registryKey != null)
+        {
+            registryKey.SetValue(valueName, newPath);
+            registryKey.Close();
+        }
+        else
+        {
+            registryKey = Registry.CurrentUser.CreateSubKey(key);
+            registryKey.SetValue(valueName, newPath);
+            registryKey.Close();
+        }
     }
 }
