@@ -1,3 +1,6 @@
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Drawing.Design;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,12 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using MusicPlayer.Utils;
-using System.ComponentModel;
 using System.Windows.Threading;
-using System.Drawing.Design;
-
+using MusicPlayer.Utils;
 
 namespace MusicPlayer;
 
@@ -33,12 +32,12 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         GatherPaths();
-        
+
         MusicFilesList = new ObservableCollection<MusicFile>();
         Player = new AudioPlayerNAudio();
         timer = new DispatcherTimer();
         SetDispacher();
-        
+
         CurrentSongTitle = new ObservableProperty<string>();
         CurrentSongArtist = new ObservableProperty<string>();
 
@@ -69,11 +68,11 @@ public partial class MainWindow : Window
     }
 
     private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-	{
+    {
         float newVolume = ((float)slVolume.Value) / 100;
         Console.WriteLine(newVolume);
-		Player.Volume(newVolume);
-	}
+        Player.Volume(newVolume);
+    }
 
     public class MusicFile
     {
@@ -95,6 +94,7 @@ public partial class MainWindow : Window
         private void PlayMusic(string filePath)
         {
             Player.Play(filePath);
+            Player.Volume(0);
             CurrentSongTitle.Value = Title;
             CurrentSongArtist.Value = Artist;
         }
