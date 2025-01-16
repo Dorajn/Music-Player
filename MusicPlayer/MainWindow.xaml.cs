@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Microsoft.VisualBasic.Devices;
 using MusicPlayer.Utils;
 
 namespace MusicPlayer;
@@ -64,7 +65,7 @@ public partial class MainWindow : Window
         LeafNodes = new ObservableCollection<LeafNode>();
         foreach (var playlist in data.FetchedPlaylists)
         {
-            LeafNodes.Add(new LeafNode(playlist.Name, playlist.AudioNames));
+            LeafNodes.Add(new LeafNode(playlist.Name, playlist.AudioFiles));
         }
     }
 
@@ -105,23 +106,29 @@ public partial class MainWindow : Window
     {
         public string Header { get; set; } // Displayed text
         public ICommand ButtonCommand { get; set; } // Command for the button
-        public List<string> Data { get; set; } // Additional data, like file paths
+        public List<AudioFile> AudioFiles { get; set; } // Additional data, like file paths
 
-        public LeafNode(string header, List<string> songs)
+        public LeafNode(string header, List<AudioFile> audioFiles)
         {
             Header = header;
-            Data = new List<string>(songs);
+            AudioFiles = audioFiles;
             ButtonCommand = new RelayCommand(param => ExecuteCommand(param));
         }
 
         private void ExecuteCommand(object param)
         {
             MusicFilesList.Clear();
-            foreach (var data in Data)
+            foreach (AudioFile audioFile in AudioFiles)
             {
                 MusicFile mf = new MusicFile();
-                mf.FilePath = Metadata.absolutePath + "\\" + Header + "\\" + data;
-                mf.Title = data;
+                mf.FilePath =
+                    Metadata.absolutePath
+                    + "\\"
+                    + Header
+                    + "\\"
+                    + audioFile.Name
+                    + audioFile.Format;
+                mf.Title = audioFile.Name;
                 MusicFilesList.Add(mf);
             }
         }

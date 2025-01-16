@@ -1,13 +1,20 @@
 using System.IO;
+using MusicPlayer.Utils;
+
+public class AudioFile
+{
+    public string Name { get; internal set; }
+    public string Format { get; internal set; }
+}
+
+public class Playlist
+{
+    public string Name { get; internal set; }
+    public List<AudioFile> AudioFiles { get; internal set; } = [];
+}
 
 public class Data
 {
-    public class Playlist
-    {
-        public string Name { get; internal set; };
-        public List<string> AudioNames { get; internal set; } = [];
-    }
-
     public List<Playlist> FetchedPlaylists { get; private set; } = [];
 
     public Data(string directoryPath)
@@ -17,16 +24,31 @@ public class Data
         foreach (string playlistPath in playlistPaths)
         {
             DirectoryInfo playlistInfo = new DirectoryInfo(playlistPath);
-            List<string> audioNames = playlistInfo
+            List<AudioFile> audioFiles = playlistInfo
                 .GetFiles()
-                .Where(file =>
-                    formats.Any(ext => file.Name.EndsWith(ext, StringComparison.OrdinalIgnoreCase))
-                )
-                .Select(file => file.Name)
+                .Where(file => formats.Any(format => Path.GetExtension(file.Name) == format))
+                .Select(file => new AudioFile
+                {
+                    Name = Path.GetFileNameWithoutExtension(file.Name),
+                    Format = Path.GetExtension(file.Name),
+                })
                 .ToList();
-            Playlist playlist = new Playlist { Name = playlistInfo.Name, AudioNames = audioNames };
+            Playlist playlist = new Playlist { Name = playlistInfo.Name, AudioFiles = audioFiles };
             FetchedPlaylists.Add(playlist);
         }
+    }
+
+    public static string? GetLyrics(string playlistName, string audioFileName)
+    {
+        string filePath =
+            Metadata.absolutePath + "\\" + playlistName + "\\" + audioFileName + ".txt";
+
+        if (!File.Exists(filePath))
+        {
+            return null;
+        }
+
+        return File.ReadAllText(filePath);
     }
 
     // For debuging
@@ -35,9 +57,9 @@ public class Data
         foreach (var playlist in FetchedPlaylists)
         {
             Console.WriteLine(playlist.Name);
-            foreach (var audioName in playlist.AudioNames)
+            foreach (var audioFile in playlist.AudioFiles)
             {
-                Console.WriteLine("-- " + audioName);
+                Console.WriteLine("-- " + audioFile.Name);
             }
         }
     }
