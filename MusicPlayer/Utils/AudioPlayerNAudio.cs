@@ -1,6 +1,6 @@
-﻿using NAudio.Wave;
+﻿using System.Windows.Media;
+using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
-using System.Windows.Media;
 using TagLib;
 
 namespace MusicPlayer.Utils;
@@ -22,6 +22,7 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
     {
         try
         {
+            _player.Stop();
             _audioFileReader = CreateAudioFileReader(filePath);
             _volumeProvider = new VolumeSampleProvider(_audioFileReader.ToSampleProvider());
             Volume(VolumeLevel);
@@ -84,7 +85,7 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
             ".mp3" => new Mp3FileReader(filePath),
             ".wav" => new WaveFileReader(filePath),
             ".aiff" => new AiffFileReader(filePath),
-            _ => throw new NotSupportedException($"File format {extension} is not supported")
+            _ => throw new NotSupportedException($"File format {extension} is not supported"),
         };
     }
 
@@ -92,7 +93,7 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
     {
         if (volume >= 0 && volume <= 1)
         {
-            if(_volumeProvider != null)
+            if (_volumeProvider != null)
                 _volumeProvider.Volume = volume;
             VolumeLevel = volume;
         }
@@ -106,7 +107,7 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
             return duration.ToString(@"mm\:ss");
         }
     }
-    
+
     public double GetSongPlaybackPercentage()
     {
         if (_audioFileReader == null || _audioFileReader.TotalTime == TimeSpan.Zero)
@@ -114,7 +115,8 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
             return 0;
         }
 
-        double percentage = _audioFileReader.CurrentTime.TotalSeconds / _audioFileReader.TotalTime.TotalSeconds;
+        double percentage =
+            _audioFileReader.CurrentTime.TotalSeconds / _audioFileReader.TotalTime.TotalSeconds;
         return percentage;
     }
 

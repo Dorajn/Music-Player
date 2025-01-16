@@ -96,7 +96,6 @@ public partial class MainWindow : Window
         private void PlayMusic(string filePath)
         {
             Player.Play(filePath);
-            Player.Volume(0);
             CurrentSongTitle.Value = Title;
             CurrentSongArtist.Value = Artist;
         }
