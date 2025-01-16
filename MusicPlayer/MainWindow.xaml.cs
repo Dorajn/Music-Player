@@ -60,10 +60,11 @@ public partial class MainWindow : Window
     private void GatherPaths()
     {
         Data data = new Data(Metadata.absolutePath);
+        data.Print();
         LeafNodes = new ObservableCollection<LeafNode>();
-        foreach (var playlist in data.FetchedData)
+        foreach (var playlist in data.FetchedPlaylists)
         {
-            LeafNodes.Add(new LeafNode(playlist.Item1, playlist.Item2));
+            LeafNodes.Add(new LeafNode(playlist.Name, playlist.AudioNames));
         }
     }
 

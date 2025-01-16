@@ -2,28 +2,42 @@ using System.IO;
 
 public class Data
 {
-    public List<(string, List<string>)> FetchedData { get; private set; } = [];
+    public class Playlist
+    {
+        public string Name { get; internal set; };
+        public List<string> AudioNames { get; internal set; } = [];
+    }
+
+    public List<Playlist> FetchedPlaylists { get; private set; } = [];
 
     public Data(string directoryPath)
     {
-        string[] subDirectoriePaths = Directory.GetDirectories(directoryPath);
-        foreach (string subDirectoryPath in subDirectoriePaths)
+        string[] formats = { ".mp3", ".wav", ".aiff" };
+        string[] playlistPaths = Directory.GetDirectories(directoryPath);
+        foreach (string playlistPath in playlistPaths)
         {
-            DirectoryInfo subDirectoryInfo = new DirectoryInfo(subDirectoryPath);
-            List<string> fileNames = subDirectoryInfo.GetFiles().Select(file => file.Name).ToList();
-            FetchedData.Add((subDirectoryInfo.Name, fileNames));
+            DirectoryInfo playlistInfo = new DirectoryInfo(playlistPath);
+            List<string> audioNames = playlistInfo
+                .GetFiles()
+                .Where(file =>
+                    formats.Any(ext => file.Name.EndsWith(ext, StringComparison.OrdinalIgnoreCase))
+                )
+                .Select(file => file.Name)
+                .ToList();
+            Playlist playlist = new Playlist { Name = playlistInfo.Name, AudioNames = audioNames };
+            FetchedPlaylists.Add(playlist);
         }
     }
 
     // For debuging
     public void Print()
     {
-        foreach (var (subDirectory, subDirectoryFiles) in FetchedData)
+        foreach (var playlist in FetchedPlaylists)
         {
-            Console.WriteLine(subDirectory);
-            foreach (var subDirectoryFile in subDirectoryFiles)
+            Console.WriteLine(playlist.Name);
+            foreach (var audioName in playlist.AudioNames)
             {
-                Console.WriteLine("-- " + subDirectoryFile);
+                Console.WriteLine("-- " + audioName);
             }
         }
     }
