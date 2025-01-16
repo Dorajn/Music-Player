@@ -39,9 +39,9 @@
                 <TreeView ItemsSource="{Binding LeafNodes}" Background="#1D1D1D" Foreground="White" BorderThickness="0">
                     <TreeView.ItemTemplate>
                         <DataTemplate>
-                            <Button Content="{Binding Header}" 
+                            <Button Content="{Binding PlaylistName}" 
                                     Command="{Binding ButtonCommand}" 
-                                    CommandParameter="{Binding Data}" 
+                                    CommandParameter="{Binding Songs}" 
                                     Background="#1DB954" 
                                     Foreground="White" 
                                     HorizontalAlignment="Stretch" />
@@ -119,7 +119,7 @@
             <!-- Right (Volume Control) -->
             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
                 <TextBlock Text="🔊" Foreground="White" VerticalAlignment="Center"/>
-                <Slider Maximum="100" Width="100" Margin="10,0" VerticalAlignment="Center" Name="slVolume" ValueChanged="VolumeSlider_ValueChanged"/>
+                <Slider Maximum="100" Width="100" Margin="10,0" VerticalAlignment="Center" Name="slVolume" />
             </StackPanel>
         </Grid>
     </Grid>

@@ -9,8 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Models\" />
-      <Folder Include="Repositories\" />
       <Folder Include="Views\" />
     </ItemGroup>
 
