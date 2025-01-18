@@ -35,6 +35,7 @@ public class LeafNode
                 + audioFile.Name
                 + audioFile.Format;
             mf.Title = audioFile.Name;
+            mf.Playlist = PlaylistName;
             musicFilesList.Add(mf);
         }
     }

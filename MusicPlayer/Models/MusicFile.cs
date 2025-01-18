@@ -10,6 +10,7 @@ public class MusicFile
     public string Artist { get; set; }
     public string Duration { get; set; }
     public string FilePath { get; set; }
+    public string Playlist { get; set; }
     
 
     public MusicFile()

@@ -94,7 +94,7 @@
                                             Background="#1DB954" Foreground="White" BorderBrush="Transparent"
                                             Command="{Binding Path=mainViewModel.MusicPlayerMenager.PlayCommand, ElementName=Root}"
                                             CommandParameter="{Binding Title}" 
-                                            />
+                                    />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

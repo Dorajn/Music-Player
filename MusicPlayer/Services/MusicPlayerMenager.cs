@@ -30,8 +30,11 @@ public class MusicPlayerMenager
     }
     private static void PlayMusic(int ind)
     {
+        
         Player.Stop();
         MusicFile song = MusicFilesList[ind];
+        Console.WriteLine(Data.GetLyrics(song.Playlist, song.Title));
+        
         CurrentSongTitle.Value = song.Title;
         CurrentSongArtist.Value = song.Artist;
         CurrentButtonSign.Value = "❚❚";

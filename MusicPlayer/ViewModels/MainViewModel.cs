@@ -43,7 +43,7 @@ public class MainViewModel
     {
         foreach (var playlist in Data.Playlists)
         {
-            LeafNodes.Add(new LeafNode(playlist.Name, playlist.AudioFiles, MusicFilesList));
+            LeafNodes.Add(new LeafNode(playlist.Name, playlist.AudioFiles, MusicPlayerMenager.MusicFilesList));
         }
     }
 
