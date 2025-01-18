@@ -33,7 +33,9 @@ public class MusicPlayerMenager
         
         Player.Stop();
         MusicFile song = MusicFilesList[ind];
-        Console.WriteLine(Data.GetLyrics(song.Playlist, song.Title));
+        
+        Console.WriteLine(Data.GetLyrics(song));
+        // Data.CreateAndOpenFile(song);
         
         CurrentSongTitle.Value = song.Title;
         CurrentSongArtist.Value = song.Artist;

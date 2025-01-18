@@ -1,4 +1,7 @@
+using System.Diagnostics;
 using System.IO;
+using System.Text.Json.Serialization;
+using MusicPlayer.Model;
 using MusicPlayer.Utils;
 
 public class AudioFile
@@ -38,10 +41,9 @@ public class Data
         }
     }
 
-    public static string? GetLyrics(string playlistName, string audioFileName)
+    public static string? GetLyrics(MusicFile song)
     {
-        string filePath =
-            Metadata.absolutePath + "\\" + playlistName + "\\" + audioFileName + ".txt";
+        string filePath = Metadata.absolutePath + "\\" + song.Playlist  + "\\" + song.Title + ".txt";
 
         if (!File.Exists(filePath))
         {
@@ -49,6 +51,18 @@ public class Data
         }
 
         return File.ReadAllText(filePath);
+    }
+
+    public static void CreateAndOpenFile(MusicFile song)
+    {
+        string filePath = Metadata.absolutePath + "\\" + song.Playlist + "\\" + song.Title + ".txt";
+        
+        if (!File.Exists(filePath))
+        {
+            using (StreamWriter writer = new StreamWriter(filePath));
+        }
+        
+        Process.Start("notepad.exe", filePath);
     }
 
     // For debuging
