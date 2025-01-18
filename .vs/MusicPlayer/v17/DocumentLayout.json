@@ -1,26 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\",
+  "WorkspaceRootPath": "C:\\Users\\derqu\\OneDrive\\Pulpit\\chad\\chad-player\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|e:\\.1\\5 semestr\\c# .net\\projekt\\musicplayer\\musicplayer\\utils\\audioplayermedia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|solutionrelative:musicplayer\\utils\\audioplayermedia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|c:\\users\\derqu\\onedrive\\pulpit\\chad\\chad-player\\musicplayer\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|solutionrelative:musicplayer\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|e:\\.1\\5 semestr\\c# .net\\projekt\\musicplayer\\musicplayer\\utils\\iaudioplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|solutionrelative:musicplayer\\utils\\iaudioplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|e:\\.1\\5 semestr\\c# .net\\projekt\\musicplayer\\musicplayer\\utils\\audioplayernaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|solutionrelative:musicplayer\\utils\\audioplayernaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|e:\\.1\\5 semestr\\c# .net\\projekt\\musicplayer\\musicplayer\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|solutionrelative:musicplayer\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|e:\\.1\\5 semestr\\c# .net\\projekt\\musicplayer\\musicplayer\\musicplayer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|solutionrelative:musicplayer\\musicplayer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|c:\\users\\derqu\\onedrive\\pulpit\\chad\\chad-player\\musicplayer\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E42AF67E-801F-4276-AFA6-5FD66B1CE5BF}|MusicPlayer\\MusicPlayer.csproj|solutionrelative:musicplayer\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,68 +21,31 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\App.xaml.cs",
-              "RelativeDocumentMoniker": "MusicPlayer\\App.xaml.cs",
-              "ToolTip": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\App.xaml.cs",
-              "RelativeToolTip": "MusicPlayer\\App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T16:36:54.669Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AudioPlayerMedia.cs",
-              "DocumentMoniker": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\Utils\\AudioPlayerMedia.cs",
-              "RelativeDocumentMoniker": "MusicPlayer\\Utils\\AudioPlayerMedia.cs",
-              "ToolTip": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\Utils\\AudioPlayerMedia.cs",
-              "RelativeToolTip": "MusicPlayer\\Utils\\AudioPlayerMedia.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwB4AAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T18:04:02.531Z",
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\derqu\\OneDrive\\Pulpit\\chad\\chad-player\\MusicPlayer\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MusicPlayer\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\derqu\\OneDrive\\Pulpit\\chad\\chad-player\\MusicPlayer\\MainWindow.xaml",
+              "RelativeToolTip": "MusicPlayer\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-15T16:07:45.138Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MusicPlayer.csproj",
-              "DocumentMoniker": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\MusicPlayer.csproj",
-              "RelativeDocumentMoniker": "MusicPlayer\\MusicPlayer.csproj",
-              "ToolTip": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\MusicPlayer.csproj",
-              "RelativeToolTip": "MusicPlayer\\MusicPlayer.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-01-09T17:57:55.142Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "IAudioPlayer.cs",
-              "DocumentMoniker": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\Utils\\IAudioPlayer.cs",
-              "RelativeDocumentMoniker": "MusicPlayer\\Utils\\IAudioPlayer.cs",
-              "ToolTip": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\Utils\\IAudioPlayer.cs",
-              "RelativeToolTip": "MusicPlayer\\Utils\\IAudioPlayer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T17:45:41.778Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AudioPlayerNAudio.cs",
-              "DocumentMoniker": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\Utils\\AudioPlayerNAudio.cs",
-              "RelativeDocumentMoniker": "MusicPlayer\\Utils\\AudioPlayerNAudio.cs",
-              "ToolTip": "E:\\.1\\5 semestr\\C# .NET\\Projekt\\MusicPlayer\\MusicPlayer\\Utils\\AudioPlayerNAudio.cs",
-              "RelativeToolTip": "MusicPlayer\\Utils\\AudioPlayerNAudio.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAUwFAAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T16:30:32.048Z",
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\derqu\\OneDrive\\Pulpit\\chad\\chad-player\\MusicPlayer\\App.xaml",
+              "RelativeDocumentMoniker": "MusicPlayer\\App.xaml",
+              "ToolTip": "C:\\Users\\derqu\\OneDrive\\Pulpit\\chad\\chad-player\\MusicPlayer\\App.xaml",
+              "RelativeToolTip": "MusicPlayer\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-01-15T16:07:14.373Z",
               "EditorCaption": ""
             }
           ]
