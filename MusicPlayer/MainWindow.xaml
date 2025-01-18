@@ -35,7 +35,7 @@
                 
                 <!-- Navigation Buttons -->
                 <Button Content="Your Library" Style="{StaticResource NavButtonStyle}" />
-                <Separator Margin="10"/>
+                <Separator Margin="20"/>
 
                 <!-- TreeView for Folder Structure -->
                 <TreeView ItemsSource="{Binding LeafNodes}" Background="#1D1D1D" Foreground="White" BorderThickness="0">
@@ -44,9 +44,17 @@
                             <Button Content="{Binding PlaylistName}" 
                                     Command="{Binding ButtonCommand}" 
                                     CommandParameter="{Binding Songs}" 
-                                    Background="#1DB954" 
+                                    Background="#1D1D1D" 
                                     Foreground="White" 
-                                    HorizontalAlignment="Stretch" />
+                                    HorizontalAlignment="Stretch" 
+                                    Height="50"
+                                    Width="180"
+                                    FontSize="17"
+                                    HorizontalContentAlignment="Center"
+                                    Margin="0,0,0,10"
+                                    BorderBrush="White" 
+                                    BorderThickness="2" >
+                            </Button>
                         </DataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
@@ -82,10 +90,11 @@
                                     <TextBlock Text="{Binding Duration}" Width="100" Foreground="White" VerticalAlignment="Center" Margin="5,0"/>
                                     
                                     <!-- Play Button -->
-                                    <Button Content="Play" Width="80" Height="30" Margin="10,0" 
+                                    <Button Content="Play" Width="80" Height="30" Margin="10,-1" 
                                             Background="#1DB954" Foreground="White" BorderBrush="Transparent"
                                             Command="{Binding Path=mainViewModel.MusicPlayerMenager.PlayCommand, ElementName=Root}"
-                                            CommandParameter="{Binding Title}" />
+                                            CommandParameter="{Binding Title}" 
+                                            />
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -119,6 +128,7 @@
                         Command="{Binding MusicPlayerMenager.PauseResumeCommand}"/>
                 <Button Content="⏭" Width="40" Height="40" Foreground="White" Background="Transparent" BorderBrush="Transparent"
                         Command="{Binding MusicPlayerMenager.SkipForwardCommand}"/>
+
             </StackPanel>
 
             <!-- Right (Volume Control) -->

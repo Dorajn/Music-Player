@@ -41,13 +41,15 @@ public class MusicPlayerMenager
     }
 
     private static void SkipForward()
-    {
-        PlayMusic((CurrentSongIndex + 1) % MusicFilesList.Count);
+    {  
+        if(MusicFilesList.Count != 0)
+            PlayMusic((CurrentSongIndex + 1) % MusicFilesList.Count);
     }
 
     private static void SkipBackward()
     {
-        PlayMusic(CurrentSongIndex == 0 ? MusicFilesList.Count - 1 : CurrentSongIndex - 1);
+        if(MusicFilesList.Count != 0)
+            PlayMusic(CurrentSongIndex == 0 ? MusicFilesList.Count - 1 : CurrentSongIndex - 1);
     }
 
     private static void PauseResume()
