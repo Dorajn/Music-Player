@@ -41,16 +41,18 @@ public class MainViewModel
 
     private void GatherPaths()
     {
-        foreach (var playlist in Data.FetchedData)
+        foreach (var playlist in Data.Playlists)
         {
-            LeafNodes.Add(new LeafNode(playlist.Item1, playlist.Item2, MusicPlayerMenager.MusicFilesList));
+            LeafNodes.Add(new LeafNode(playlist.Name, playlist.AudioFiles, MusicFilesList));
         }
     }
-    
+
+
     public void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e, float slVolume)
     {
         float newVolume = slVolume / 100;
         Console.WriteLine(newVolume);
         MusicPlayerMenager.Player.Volume(newVolume);
     }
+
 }
