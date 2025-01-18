@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
@@ -11,9 +11,6 @@ namespace MusicPlayer.ViewModels;
 public class MainViewModel
 {
     public ObservableCollection<LeafNode> LeafNodes { get; set; }
-    public ObservableCollection<MusicFile> MusicFilesList { get; set; }
-    public ObservableProperty<string> CurrentSongTitle { get; set; }
-    public ObservableProperty<string> CurrentSongArtist { get; set; }
     public MusicPlayerMenager MusicPlayerMenager { get; set; }
     public Data Data { get; set; }
 
@@ -23,10 +20,7 @@ public class MainViewModel
     {
         Data = new Data(Metadata.absolutePath);
         LeafNodes = new ObservableCollection<LeafNode>();
-        MusicFilesList = new ObservableCollection<MusicFile>();
         MusicPlayerMenager = new MusicPlayerMenager();
-        CurrentSongTitle = new ObservableProperty<string>();
-        CurrentSongArtist = new ObservableProperty<string>();
 
         _timer = new DispatcherTimer();
         GatherPaths();
@@ -53,10 +47,12 @@ public class MainViewModel
         }
     }
 
-    // private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-    // {
-    //     float newVolume = ((float)slVolume.Value) / 100;
-    //     Console.WriteLine(newVolume);
-    //     //Player.Volume(newVolume);
-    // }
+
+    public void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e, float slVolume)
+    {
+        float newVolume = slVolume / 100;
+        Console.WriteLine(newVolume);
+        MusicPlayerMenager.Player.Volume(newVolume);
+    }
+
 }

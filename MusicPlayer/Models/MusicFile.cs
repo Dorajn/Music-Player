@@ -1,4 +1,4 @@
-﻿using System.Windows.Input;
+using System.Windows.Input;
 using MusicPlayer.Services;
 using MusicPlayer.Utils;
 
@@ -10,7 +10,6 @@ public class MusicFile
     public string Artist { get; set; }
     public string Duration { get; set; }
     public string FilePath { get; set; }
-    public ICommand PlayCommand { get; set; }
     
 
     public MusicFile()
@@ -19,14 +18,6 @@ public class MusicFile
         Artist = string.Empty;
         Duration = string.Empty;
         FilePath = string.Empty;
-        //PlayCommand = new RelayCommand(param => PlayMusic(param?.ToString() ?? string.Empty));
     }
 
-    // private void PlayMusic(string filePath)
-    // {
-    //     MusicPlayerMenager.Player.Play(filePath);
-    //     // window.Player.Play(filePath);
-    //     // window.CurrentSongTitle.Value = Title;
-    //     // window.CurrentSongArtist.Value = Artist;
-    // }
 }

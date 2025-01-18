@@ -17,4 +17,9 @@
       <PackageReference Include="TagLibSharp" Version="2.3.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Assets\chad_player.ico" />
+      <Resource Include="Assets\chad_player.ico" />
+    </ItemGroup>
+
 </Project>
