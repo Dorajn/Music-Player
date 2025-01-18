@@ -10,6 +10,7 @@ public class MusicPlayerMenager
     
     public static AudioPlayerNAudio Player = new AudioPlayerNAudio();
     public static ICommand PlayCommand { get; set; } = new RelayCommand(param => PlayMusic(GetIndex(param?.ToString() ?? string.Empty)));
+    public static ICommand AddLyricsCommand { get; set; } = new RelayCommand(param => AddLyrics(GetIndex(param?.ToString() ?? string.Empty)));
     public static ICommand SkipForwardCommand { get; set; } = new RelayCommand(_ => SkipForward());
     public static ICommand SkipBackwardCommand { get; set; } = new RelayCommand(_ => SkipBackward());
     public static ICommand PauseResumeCommand { get; set; } = new RelayCommand(_ => PauseResume());
@@ -33,7 +34,9 @@ public class MusicPlayerMenager
         
         Player.Stop();
         MusicFile song = MusicFilesList[ind];
-        Console.WriteLine(Data.GetLyrics(song.Playlist, song.Title));
+        
+        Console.WriteLine(Data.GetLyrics(song));
+        // Data.CreateAndOpenFile(song);
         
         CurrentSongTitle.Value = song.Title;
         CurrentSongArtist.Value = song.Artist;
@@ -41,6 +44,12 @@ public class MusicPlayerMenager
         CurrentSongIndex = ind;
         isPlaying = true;
         Player.Play(song.FilePath);
+    }
+
+    private static void AddLyrics(int ind)
+    {
+        MusicFile song = MusicFilesList[ind];
+        Data.CreateAndOpenFile(song);
     }
 
     private static void SkipForward()
