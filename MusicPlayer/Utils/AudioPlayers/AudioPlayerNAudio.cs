@@ -2,6 +2,8 @@
 using NAudio.Wave.SampleProviders;
 using System.Windows.Media;
 using TagLib;
+using NAudio.Dsp;
+
 
 namespace MusicPlayer.Utils;
 
@@ -124,4 +126,5 @@ public class AudioPlayerNAudio : IDisposable, IAudioPlayer
         string artist = file.Tag.Performers.Length > 0 ? file.Tag.Performers[0] : "Unknown artist";
         return artist;
     }
+
 }

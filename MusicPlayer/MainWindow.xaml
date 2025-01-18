@@ -54,6 +54,7 @@
                                     Margin="0,0,0,10"
                                     BorderBrush="White" 
                                     BorderThickness="2" >
+                                    
                             </Button>
                         </DataTemplate>
                     </TreeView.ItemTemplate>
@@ -90,9 +91,16 @@
                                     <TextBlock Text="{Binding Duration}" Width="100" Foreground="White" VerticalAlignment="Center" Margin="5,0"/>
                                     
                                     <!-- Play Button -->
-                                    <Button Content="Play" Width="80" Height="30" Margin="10,-1" 
+                                    <Button Content="Play" Width="80" Height="30" Margin="10,0" 
                                             Background="#1DB954" Foreground="White" BorderBrush="Transparent"
                                             Command="{Binding Path=mainViewModel.MusicPlayerMenager.PlayCommand, ElementName=Root}"
+                                            CommandParameter="{Binding Title}" 
+                                    />
+                                    
+                                    <!-- Add lyrics button -->
+                                    <Button Content="+" Width="30" Height="30" Margin="10,0" 
+                                            Background="#1D1D1D" Foreground="White" BorderBrush="Transparent"
+                                            Command="{Binding Path=mainViewModel.MusicPlayerMenager.AddLyricsCommand, ElementName=Root}"
                                             CommandParameter="{Binding Title}" 
                                     />
                                 </StackPanel>
