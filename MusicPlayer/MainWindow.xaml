@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicPlayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="900"
+        Title="Chad player" Height="600" Width="900"
+        Icon="pack://application:,,,/Assets/chad_player.ico"
         Background="#121212">
     <Window.Resources>
     <Style x:Key="NavButtonStyle" TargetType="Button">

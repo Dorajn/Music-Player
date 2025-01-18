@@ -18,7 +18,6 @@ public class MusicFile
         Artist = string.Empty;
         Duration = string.Empty;
         FilePath = string.Empty;
-        
     }
 
 }
