@@ -31,14 +31,10 @@ public class MusicPlayerMenager
     }
     private static void PlayMusic(int ind)
     {
-        
         Player.Stop();
         MusicFile song = MusicFilesList[ind];
-        
-        Console.WriteLine(Data.GetLyrics(song));
-        // Data.CreateAndOpenFile(song);
-        
-        CurrentSongTitle.Value = song.Title;
+
+        CurrentSongTitle.Value = ShortenTitle(song.Title);
         CurrentSongArtist.Value = song.Artist;
         CurrentButtonSign.Value = "❚❚";
         CurrentSongIndex = ind;
@@ -92,11 +88,23 @@ public class MusicPlayerMenager
         return 0;
     }
 
-    public static void checkIfSongEnded(object sender, EventArgs e)
+    public static void CheckIfSongEnded(object sender, EventArgs e)
     {
         if (Player.GetSongPlaybackPercentage() >= 1)
         {
             SkipForward();
+        }
+    }
+
+    private static string ShortenTitle(string text)
+    {
+        const int SIZE = 22;
+        if (text.Length <= SIZE)
+            return text;
+        else
+        {
+            string beg = text.Substring(0, SIZE - 3);
+            return beg + "...";
         }
     }
 }
