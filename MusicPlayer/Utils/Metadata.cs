@@ -8,7 +8,7 @@ public class Metadata
     private static string key = @"SOFTWARE\ChadPlayer";
     private static string valueName = "musicFolderPath";
 
-    public static void SaveMusicFolderPath(string path = @"C:\Users\nier\Desktop\Music")
+    public static void SaveMusicFolderPath(string path)
     {
         absolutePath = path;
         RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(key);

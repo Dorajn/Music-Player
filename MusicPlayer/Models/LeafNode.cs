@@ -17,8 +17,8 @@ public class LeafNode
     )
     {
         PlaylistName = playlistName;
-        AudioFiles = new List<AudioFile>(audioFile);
-        ButtonCommand = new RelayCommand(param => ExecuteCommand(musicFilesList));
+        AudioFiles = audioFile;
+        ButtonCommand = new RelayCommand(_ => ExecuteCommand(musicFilesList));
     }
 
     private void ExecuteCommand(ObservableCollection<MusicFile> musicFilesList)
@@ -33,7 +33,7 @@ public class LeafNode
                 + PlaylistName
                 + "\\"
                 + audioFile.Name
-                + audioFile.Format;
+                + audioFile.Extension;
             mf.Title = audioFile.Name;
             mf.Playlist = PlaylistName;
             musicFilesList.Add(mf);
