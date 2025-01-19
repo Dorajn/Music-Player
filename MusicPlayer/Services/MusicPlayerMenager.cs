@@ -91,4 +91,12 @@ public class MusicPlayerMenager
         }
         return 0;
     }
+
+    public static void checkIfSongEnded(object sender, EventArgs e)
+    {
+        if (Player.GetSongPlaybackPercentage() >= 1)
+        {
+            SkipForward();
+        }
+    }
 }
